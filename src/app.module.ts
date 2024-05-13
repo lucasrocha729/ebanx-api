@@ -4,6 +4,6 @@ import { BalanceModule } from './balance/balance.module';
 @Module({
   imports: [BalanceModule],
   controllers: [],
-  providers: [],
+  providers: []
 })
 export class AppModule {}
