@@ -1,4 +1,12 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Post,
+  Query
+} from '@nestjs/common';
 import { BalanceService } from './balance.service';
 import { HttpResponse } from 'src/interfaces/i-http-return';
 import { EventDto } from './dto/event-dto';
@@ -16,5 +24,10 @@ export class BalanceController {
   @Post('/event')
   createEvent(@Body() eventDto: EventDto): any {
     return this.balanceService.createEvent(eventDto);
+  }
+
+  @Get('/balance')
+  getBalance(@Query('account_id') accountId: string): HttpResponse {
+    return this.balanceService.getBalance(accountId);
   }
 }

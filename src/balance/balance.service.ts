@@ -25,6 +25,19 @@ export class BalanceService {
     };
   }
 
+  getBalance(accountId: string): HttpResponse {
+    if (!this.accounts.find((acc) => acc.id === accountId)) {
+      throw new NotFoundException('Account not found');
+    }
+    return {
+      message: 'Account located successfully!',
+      body: {
+        balance: this.accounts.find((account) => account.id === accountId)
+      },
+      status: 200
+    };
+  }
+
   createEvent(eventDto: EventDto): HttpResponse {
     try {
       const { type, destination, amount, origin } = eventDto;
