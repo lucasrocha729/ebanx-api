@@ -8,7 +8,6 @@ import {
   Query
 } from '@nestjs/common';
 import { BalanceService } from './balance.service';
-import { HttpResponse } from 'src/interfaces/i-http-return';
 import { EventDto } from './dto/event-dto';
 
 @Controller()
@@ -17,17 +16,17 @@ export class BalanceController {
 
   @Post('/reset')
   @HttpCode(HttpStatus.OK)
-  reset(): HttpResponse {
+  reset() {
     return this.balanceService.reset();
   }
 
   @Post('/event')
-  createEvent(@Body() eventDto: EventDto): any {
+  createEvent(@Body() eventDto: EventDto) {
     return this.balanceService.createEvent(eventDto);
   }
 
   @Get('/balance')
-  getBalance(@Query('account_id') accountId: string): HttpResponse {
+  getBalance(@Query('account_id') accountId: string) {
     return this.balanceService.getBalance(accountId);
   }
 }
