@@ -11,6 +11,12 @@ export class BalanceService {
     this.accounts = [];
   }
 
+  protected eventResolve = {
+    deposit: this.handleDeposit.bind(this),
+    transfer: this.handleTransfer.bind(this),
+    withdraw: this.handleWithdraw.bind(this)
+  };
+
   reset(): string {
     this.accounts = [];
 
@@ -30,21 +36,7 @@ export class BalanceService {
 
   createEvent(eventDto: EventDto): HttpResponse {
     const { type, destination, amount, origin } = eventDto;
-    let eventResult = null;
-
-    switch (type) {
-      case 'deposit':
-        eventResult = this.handleDeposit(destination, amount);
-        break;
-      case 'transfer':
-        eventResult = this.handleTransfer(origin, destination, amount);
-        break;
-      case 'withdraw':
-        eventResult = this.handleWithdraw(origin, amount);
-        break;
-      default:
-        throw new NotFoundException('Invalid event type');
-    }
+    const eventResult = this.eventResolve[type](origin, destination, amount);
 
     return eventResult;
   }
