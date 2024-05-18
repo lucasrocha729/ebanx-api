@@ -36,12 +36,16 @@ export class BalanceService {
 
   createEvent(eventDto: EventDto): HttpResponse {
     const { type, destination, amount, origin } = eventDto;
-    const eventResult = this.eventResolve[type](origin, destination, amount);
+    const eventResult = this.eventResolve[type]({
+      origin,
+      destination,
+      amount
+    });
 
     return eventResult;
   }
 
-  protected handleDeposit(destination: string, amount: number) {
+  protected handleDeposit({ destination, amount }) {
     const accountToMoviment = this.accounts.find(
       (account) => account.id === destination
     );
@@ -59,7 +63,7 @@ export class BalanceService {
       destination: this.accounts.find((account) => account.id === destination)
     };
   }
-  protected handleWithdraw(origin: string, amount: number) {
+  protected handleWithdraw({ origin, amount }) {
     const accountToMoviment = this.accounts.find(
       (account) => account.id === origin
     );
@@ -80,11 +84,7 @@ export class BalanceService {
       origin: this.accounts.find((account) => account.id === origin)
     };
   }
-  protected handleTransfer(
-    origin: string,
-    destination: string,
-    amount: number
-  ) {
+  protected handleTransfer({ origin, destination, amount }) {
     const originAccount = this.accounts.find(
       (account) => account.id === origin
     );
