@@ -1,5 +1,5 @@
-# Projeto EBANX Software Engineer
+# EBANX Software Engineer Project
 
-### Descrição do Projeto
+### Project Description
 
-Este projeto é uma implementação de uma API simples solicitada pelo desafio da EBANX para a posição de Software Engineer. A API consiste em dois endpoints: GET /balance e POST /event. O objetivo é criar um sistema que possa lidar com essas requisições, publicá-lo na internet utilizando ngrok e testá-lo com um conjunto de testes automatizados fornecido.
+This project is an implementation of a simple API requested by the EBANX challenge for the Software Engineer position. The API consists of two endpoints: GET /balance and POST /event. The goal is to create a system that can handle these requests, publish it on the internet using ngrok, and test it with a provided set of automated tests.
