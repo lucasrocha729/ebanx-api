@@ -25,7 +25,7 @@ export class BalanceService {
 
   getBalance(accountId: string): number {
     if (!this.accounts.find((acc) => acc.id === accountId)) {
-      throw new NotFoundException();
+      throw new NotFoundException('0');
     }
 
     const accountData = this.accounts.find(
@@ -69,7 +69,7 @@ export class BalanceService {
     );
 
     if (!accountToMoviment) {
-      throw new NotFoundException();
+      throw new NotFoundException('0');
     }
 
     if (accountToMoviment.balance < amount) {
@@ -94,7 +94,7 @@ export class BalanceService {
     );
 
     if (!originAccount) {
-      throw new NotFoundException();
+      throw new NotFoundException('0');
     }
 
     // if (originAccount.balance < amount) {
